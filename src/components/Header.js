@@ -28,49 +28,81 @@ const Header = (props) => {
   //   }
   // });
 
-  // if (is_login && is_session) {
-  //   return (
+  if (is_login && is_session) {
+    return (
+      <React.Fragment>
+        <Grid is_flex padding="4px 16px">
+          <Grid>
+            <Text
+              disp="inline"
+              cursor="pointer"
+              margin="0px"
+              size="24px"
+              bold
+              _onClick={() => {
+                history.push("/");
+              }}
+            >
+              헬로
+            </Text>
+          </Grid>
+          <Grid is_flex>
+            <Button margin="5px" color="black" text="내정보"></Button>
+            <Button margin="5px" color="black" text="알림"></Button>
+            <Button
+              margin="5px"
+              color="black"
+              text="로그아웃"
+              _onClick={() => {
+                dispatch(userActions.logoutFB());
+              }}
+            ></Button>
+          </Grid>
+        </Grid>
+      </React.Fragment>
+    );
+  }
 
-  //   );
-  // }
+  // <Permit>
+  //   <React.Fragment>
+  //     <Grid is_flex padding="4px 16px">
+  //       <Grid>
+  //         <Text
+  //           disp="inline"
+  //           cursor="pointer"
+  //           margin="0px"
+  //           size="24px"
+  //           bold
+  //           _onClick={() => {
+  //             history.push("/");
+  //           }}
+  //         >
+  //           헬로
+  //         </Text>
+  //       </Grid>
+  //       <Grid is_flex>
+  //         <Button margin="5px" color="black" text="내정보"></Button>
+  //         <Button margin="5px" color="black" text="알림"></Button>
+  //         <Button
+  //           margin="5px"
+  //           color="black"
+  //           text="로그아웃"
+  //           _onClick={() => {
+  //             dispatch(userActions.logoutFB());
+  //           }}
+  //         ></Button>
+  //       </Grid>
+  //     </Grid>
+  //   </React.Fragment>
+  // </Permit>;
 
-  <Permit>
+  return (
     <React.Fragment>
       <Grid is_flex padding="4px 16px">
         <Grid>
           <Text
             disp="inline"
             cursor="pointer"
-            margin="0px"
-            size="24px"
-            bold
-            _onClick={() => {
-              history.push("/");
-            }}
-          >
-            헬로
-          </Text>
-        </Grid>
-        <Grid is_flex>
-          <Button margin="5px" color="black" text="내정보"></Button>
-          <Button margin="5px" color="black" text="알림"></Button>
-          <Button
-            margin="5px"
-            color="black"
-            text="로그아웃"
-            _onClick={() => {
-              dispatch(userActions.logoutFB());
-            }}
-          ></Button>
-        </Grid>
-      </Grid>
-    </React.Fragment>
-  </Permit>;
-  return (
-    <React.Fragment>
-      <Grid is_flex padding="4px 16px">
-        <Grid>
-          <Text
             margin="0px"
             size="24px"
             bold
@@ -104,16 +136,16 @@ const Header = (props) => {
   );
 };
 
-Header.defaultProps = {
-  // btnName: {
-  //   home: "Home",
-  //   login: "Login",
-  //   signup: "SignUp",
-  // },
-  // titleText: {
-  //   loginText: "로그인",
-  //   signupText: "회원가입",
-  // },
-};
+// Header.defaultProps = {
+//   // btnName: {
+//   //   home: "Home",
+//   //   login: "Login",
+//   //   signup: "SignUp",
+//   // },
+//   // titleText: {
+//   //   loginText: "로그인",
+//   //   signupText: "회원가입",
+//   // },
+// };
 
 export default Header;
