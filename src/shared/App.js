@@ -8,6 +8,9 @@ import { history } from "../redux/configureStore";
 import PostList from "../pages/PostList";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import PostDetail from "../pages/PostDetail";
+import PostWrite from "../pages/PostWrite";
+import BaseBorder from "../elements/BaseBorder";
 
 import Header from "../components/Header";
 import { Grid, AddButton } from "../elements/Index";
@@ -33,17 +36,23 @@ function App() {
 
   return (
     <React.Fragment>
-      <Grid>
-        <Header></Header>
-        <ConnectedRouter history={history}>
-          <Route path="/" exact component={PostList} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/signup" exact component={Signup} />
-        </ConnectedRouter>
-      </Grid>
-      <Permit>
-        <AddButton />
-      </Permit>
+      <BaseBorder margin="auto" width="60vw" minHeight="80vh" maxHeight="100%" boxSdw="0px 0px 1px 1px lightgray">
+        <Grid margin="0px 0px 1px 0px">
+          <Grid>
+            <Header></Header>
+            <ConnectedRouter history={history}>
+              <Route path="/" exact component={PostList} />
+              <Route path="/login" exact component={Login} />
+              <Route path="/signup" exact component={Signup} />
+              <Route path="/write" exact component={PostWrite} />
+              <Route path="/post/:id" exact component={PostDetail} />
+            </ConnectedRouter>
+          </Grid>
+          <Permit>
+            <AddButton />
+          </Permit>
+        </Grid>
+      </BaseBorder>
     </React.Fragment>
   );
 }

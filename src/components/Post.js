@@ -8,10 +8,14 @@ const Post = (props) => {
   return (
     <React.Fragment>
       <Grid>
-        <Grid is_flex>
-          <Image shape="circle" src={props.src} />
-          <Text bold>{props.user_info.user_name}</Text>
-          <Text>{props.insert_dt}</Text>
+        <Grid is_flex padding="16px">
+          <Grid is_flex width="auto">
+            <Image shape="circle" src={props.src} />
+            <Text bold>{props.user_info.user_name}</Text>
+          </Grid>
+          <Grid is_flex width="auto">
+            <Text>{props.insert_dt}</Text>
+          </Grid>
         </Grid>
         <Grid padding="16px">
           <Text>{props.contents}</Text>
@@ -20,12 +24,8 @@ const Post = (props) => {
           <Image shape="rectangle" src={props.src}></Image>
         </Grid>
         <Grid padding="16px">
-          <Text bold>댓글 {props.comment_cnt}개</Text>
+          <Text margin="0px" bold>댓글 {props.comment_cnt}개</Text>
         </Grid>
-        <div>user profile/user name/insert dt</div>
-        <div>contents</div>
-        <div>image</div>
-        <div>comment cnt</div>
       </Grid>
     </React.Fragment>
   );

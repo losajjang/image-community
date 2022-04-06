@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = (props) => {
-  const { margin, bg, color, hvBtn, atvBoxSdwBtn, BoxSdwBtn, text, _onClick } = props;
+  const { margin, width, bg, color, hvBtn, atvBoxSdwBtn, boxSdwBtn, text, _onClick, children } = props;
 
   const styles = {
     margin: margin,
@@ -10,27 +10,30 @@ const Button = (props) => {
     color: color,
     hvBtn: hvBtn,
     atvBoxSdwBtn: atvBoxSdwBtn,
-    BoxSdwBtn: BoxSdwBtn,
+    boxSdwBtn: boxSdwBtn,
+    width: width,
   };
 
   return (
     <React.Fragment>
       <ElButton {...styles} onClick={_onClick}>
-        {text}
+        {text ? text : children}
       </ElButton>
     </React.Fragment>
   );
 };
 
 Button.defaultProps = {
-  text: "텍스트",
+  text: false,
+  children: null,
   _onClick: () => {},
   margin: false,
+  width: "100%",
   bg: "#C4C4C4",
   color: "white",
   hvBtn: "darkgray",
   atvBoxSdwBtn: "none",
-  BoxSdwBtn: "0px 0px 10px 1px lightgray",
+  boxSdwBtn: "0px 0px 10px 1px lightgray",
 };
 
 const ElButton = styled.button`
@@ -40,8 +43,8 @@ const ElButton = styled.button`
   :active {
     box-shadow: ${(props) => props.atvBoxSdwBtn};
   }
-  box-shadow: ${(props) => props.BoxSdwBtn};
-  width: 100%;
+  box-shadow: ${(props) => props.boxSdwBtn};
+  width: ${(props) => props.width};
   background-color: ${(props) => props.bg};
   color: ${(props) => props.color};
   padding: 12px 0px;
