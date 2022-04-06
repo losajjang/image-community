@@ -1,15 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, Text, Image, Input, Button } from "../elements/Index";
 import Upload from "../shared/Upload";
 
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as postActions } from "../redux/modules/post";
+
 const PostWrite = (props) => {
+  const dispatch = useDispatch();
+  const is_login = useSelector((state) => state.user.is_login);
+  const { history } = props;
+
+  const [contents, setContents] = useState("");
+
+  const changeContents = (e) => {
+    setContents(e.target.value);
+  };
+
+  const addPost = () => {
+    dispatch(postActions.addPostFB(contents));
+  };
+
+  if (!is_login) {
+    return (
+      <Grid is_center padding="16px" margin="100px 0px">
+        <Text size="32px" bold>
+          이보시오. 방문자양반.
+        </Text>
+        <Text size="20px" bold>
+          로그인을 해야만 글을 쓸 수 있다 하오.
+        </Text>
+        <Button
+          hvBtn="gray"
+          bg="dimgray"
+          _onClick={() => {
+            history.replace("/login");
+          }}
+        >
+          로그인을 하러 가 보오.
+        </Button>
+      </Grid>
+    );
+  }
   return (
     <React.Fragment>
       <Grid padding="16px">
         <Text margin="0px" size="36px" bold>
           게시글 작성
         </Text>
-        <Upload/>
+        <Upload />
       </Grid>
       <Grid>
         <Grid padding="16px">
@@ -20,10 +58,10 @@ const PostWrite = (props) => {
         <Image shape="rectangle"></Image>
       </Grid>
       <Grid padding="16px">
-        <Input label="게시글 내용" placeholder="게시글 작성" multiLine/>
+        <Input _onChange={changeContents} label="게시글 내용" placeholder="게시글 작성" multiLine />
       </Grid>
       <Grid padding="16px">
-        <Button text="게시글 작성" hvBtn="gray" bg="dimgray"></Button>
+        <Button text="게시글 작성" hvBtn="gray" bg="dimgray" _onClick={addPost}></Button>
       </Grid>
     </React.Fragment>
   );

@@ -3,6 +3,7 @@ import { produce } from "immer"; //불변성 관리를 위해 사용
 
 import { firestore } from "../../shared/firebase";
 import { doc, getDoc, collection } from "firebase/firestore";
+import moment from "moment";
 
 const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
@@ -16,15 +17,49 @@ const initialState = {
 };
 
 const initialPost = {
-  id: 0,
-  user_info: {
-    user_name: "jmp",
-    user_profile: "https://jmpimages.s3.ap-northeast-2.amazonaws.com/IMG_4667.JPG",
-  },
+  // id: 0,
+  // user_info: {
+  //   user_name: "jmp",
+  //   user_profile: "https://jmpimages.s3.ap-northeast-2.amazonaws.com/IMG_4667.JPG",
+  // },
   image_url: "https://jmpimages.s3.ap-northeast-2.amazonaws.com/IMG_4667.JPG",
-  contents: "괌에서 자기랑",
-  comment_cnt: 10,
-  insert_dt: "2022-04-01 23:43:00",
+  contents: "",
+  comment_cnt: 0,
+  insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
+};
+
+const addPostFB = (contents = "") => {
+  return function (dispatch, getState, { history }) {
+    const postDB = firestore.collection("post");
+    const _user = getState().user.user;
+
+    const user_info = {
+      user_name: _user.user_name,
+      user_id: _user.uid,
+      user_profile: _user.user_profile,
+    };
+
+    const _post = {
+      ...initialPost,
+      contents: contents,
+      insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
+    };
+
+    postDB
+      .add({ ...user_info, ..._post })
+      .then((doc) => {
+        let post = {
+          user_info,
+          ..._post,
+          id: doc.id,
+        };
+        dispatch(addPost(post));
+        history.replace("/");
+      })
+      .catch((err) => {
+        console.log("post 작성에 실패함", err);
+      });
+  };
 };
 
 const getPostFB = () => {
@@ -80,7 +115,10 @@ export default handleActions(
       produce(state, (draft) => {
         draft.list = action.payload.post_list;
       }),
-    [ADD_POST]: (state, action) => produce(state, (draft) => {}),
+    [ADD_POST]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list.unshift(action.payload.post);
+      }),
   },
   initialState
 );
@@ -89,6 +127,7 @@ const actionCreators = {
   setPost,
   addPost,
   getPostFB,
+  addPostFB,
 };
 
 export { actionCreators };

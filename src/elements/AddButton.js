@@ -3,13 +3,19 @@ import styled from "styled-components";
 import { TiPlus } from "react-icons/ti";
 
 const AddButton = (props) => {
+  const { _onClick } = props;
+
   return (
     <React.Fragment>
-      <ElAddBtn>
+      <ElAddBtn onClick={_onClick}>
         <Plus />
       </ElAddBtn>
     </React.Fragment>
   );
+};
+
+AddButton.defaultProps = {
+  _onClick: () => {},
 };
 
 const Plus = styled(TiPlus)`
@@ -26,8 +32,8 @@ const ElAddBtn = styled.div`
   height: 50px;
   border-radius: 50%;
   position: fixed;
-  bottom: 10px;
-  right: 10px;
+  bottom: 25%;
+  right: 25%;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   ${Plus} {
     transition: transform 300ms ease-in-out;

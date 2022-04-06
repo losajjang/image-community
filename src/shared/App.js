@@ -49,7 +49,9 @@ function App() {
             </ConnectedRouter>
           </Grid>
           <Permit>
-            <AddButton />
+            <AddButton
+              _onClick={() => {history.push("/write");}}
+            />
           </Permit>
         </Grid>
       </BaseBorder>
