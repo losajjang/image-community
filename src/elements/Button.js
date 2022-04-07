@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = (props) => {
-  const { margin, width, bg, color, hvBtn, atvBoxSdwBtn, boxSdwBtn, text, _onClick, children } = props;
+  const { margin, padding, width, bg, color, hvBtn, atvBoxSdwBtn, boxSdwBtn, text, _onClick, children } = props;
 
   const styles = {
     margin: margin,
@@ -12,6 +12,7 @@ const Button = (props) => {
     atvBoxSdwBtn: atvBoxSdwBtn,
     boxSdwBtn: boxSdwBtn,
     width: width,
+    padding: padding,
   };
 
   return (
@@ -34,6 +35,7 @@ Button.defaultProps = {
   hvBtn: "darkgray",
   atvBoxSdwBtn: "none",
   boxSdwBtn: "0px 0px 10px 1px lightgray",
+  padding: "12px 0px",
 };
 
 const ElButton = styled.button`
@@ -47,7 +49,7 @@ const ElButton = styled.button`
   width: ${(props) => props.width};
   background-color: ${(props) => props.bg};
   color: ${(props) => props.color};
-  padding: 12px 0px;
+  padding: ${(props) => props.padding};
   box-sizing: border-box;
   border: none;
   ${(props) => (props.margin ? `margin:${props.margin}` : "")}

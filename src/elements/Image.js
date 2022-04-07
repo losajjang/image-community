@@ -20,7 +20,9 @@ const Image = (props) => {
     );
   }
   return (
-        <React.Fragment></React.Fragment>
+    <React.Fragment>
+      <ImageDefault {...styles}></ImageDefault>
+    </React.Fragment>
   );
 };
 
@@ -29,6 +31,14 @@ Image.defaultProps = {
   src: "https://jmpimages.s3.ap-northeast-2.amazonaws.com/IMG_4667.JPG",
   size: 36,
 };
+
+const ImageDefault = styled.div`
+  --size: ${(props) => props.size}px;
+  width: var(--size);
+  height: var(--size);
+  background-image: url("${(props) => props.src}");
+  background-size: cover;
+`;
 
 const AspectOutter = styled.div`
   width: 100%;
