@@ -23,3 +23,10 @@ yarn-debug.log*
 yarn-error.log*
 
 src/shared/firebase.js
+database.rules.json
+firebase.json
+firestore.indexes.json
+firestore.rules
+storage.rules
+.firebaserc
+/.firebase
