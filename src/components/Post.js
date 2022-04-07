@@ -1,9 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Grid, Image, Text, Button } from "../elements/Index";
+import { actionCreators as postActions } from "../redux/modules/post";
 
 import { history } from "../redux/configureStore";
 
 const Post = (props) => {
+  const dispatch = useDispatch();
+  const deletePost = () => {
+    dispatch(postActions.deletePostFB(props.id));
+  };
   return (
     <React.Fragment>
       <Grid>
@@ -24,6 +30,11 @@ const Post = (props) => {
                 }}
               >
                 수정이오
+              </Button>
+            )}
+            {props.is_me && (
+              <Button width="auto" padding="4px" margin="4px" _onClick={deletePost}>
+                삭제요
               </Button>
             )}
           </Grid>

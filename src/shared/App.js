@@ -38,7 +38,7 @@ function App() {
 
   return (
     <React.Fragment>
-      <BaseBorder margin="auto" width="60vw" minHeight="80vh" maxHeight="100%" boxSdw="0px 0px 1px 1px lightgray">
+      <BaseBorder margin="auto" width="45vw" minHeight="80vh" maxHeight="100%" boxSdw="0px 0px 1px 1px lightgray">
         <Grid margin="0px 0px 1px 0px">
           <Grid>
             <Header></Header>
